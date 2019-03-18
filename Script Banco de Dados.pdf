@@ -1,0 +1,53 @@
+CREATE table Recibo (
+	id_recibo serial null,
+	sequencia varchar (10) null,
+	valor float (30) null, 
+	dia varchar (10) null, 
+	assinatura varchar (40) null,
+	referente varchar (30) null,
+	
+	CONSTRAINT "PRIMARY KEY ID_CODIGO" primary key (id_recibo),
+	CONSTRAINT "FOREIGN KEY ID_CIDADE" foreign key (id_cidade) REFERENCES Cidade(id_cidade),
+	CONSTRAINT "FOREIGN KEY ID_USUARIO" foreign key (id_usuario) REFERENCES Usuario(id_usuario),
+	CONSTRAINT "FOREIGN KEY ID_CLIENTE" foreign key (id_cliente) REFERENCES Cliente(id_cliente)
+);
+
+CREATE table Usuario (
+	id_usuario serial null,
+	nome varchar (40) null,
+	login varchar (30) null,
+	cpf varchar (11) null, 
+	senha varchar (20) null,
+	
+	CONSTRAINT "PRIMARY KEY ID_USUARIO" primary key (id_usuario),
+	CONSTRAINT "FOREIGN KEY ID_ENDERECO" foreign key (id_endereco) REFERENCES Endereco(id_enredeco)
+);
+
+CREATE table Cliente(
+	id_cliente serial null,
+	nome varchar (30) null,
+	cpf varchar (11) null,
+
+	CONSTRAINT "PRIMARY KEY ID_CLIENTE" primary key (id_cliente),
+	CONSTRAINT "FOREIGN KEY ID_ENDERECO" foreign key (id_endereco) REFERENCES Endereco(id_enredeco)
+);
+
+CREATE table Endereco(
+	id_endereco serial null,
+	rua varchar (40) null,
+	numero char (5) null,
+	complemento varchar (20) null,
+	cep char (8) null,
+
+	CONSTRAINT "PRIMARY KEY ID_ENDERECO" primary key (id_endereco),
+	CONSTRAINT "FOREIGN KEY ID_CIDADE" foreign key (id_cidade) REFERENCES Cidade(id_cidade)
+);
+
+CREATE table Cidade(
+	id_cidade serial null,
+	nome varchar (40) null,
+	uf char (2) null,
+
+	CONSTRAINT "PRIMARY KEY ID_CIDADE" primary key (id_cidade)	
+
+);
